@@ -1,25 +1,32 @@
-package com.shoppingbackend.shoppingapi.dto;
+package com.shoppingbackend.shoppingapi.model;
 
 import java.util.Date;
 
-import com.shoppingbackend.shoppingapi.model.User;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class UserDTO {
+import com.shoppingbackend.shoppingapi.dto.UserDTO;
+
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String surname;
     private String identificationCard;
     private String celphone;
     private Date registerDate;
 
-    public UserDTO() {
+    public Long getId() {
+        return this.id;
     }
 
-    public UserDTO(String name, String surname, String identificationCard, String celphone, Date registerDate) {
-        this.name = name;
-        this.surname = surname;
-        this.identificationCard = identificationCard;
-        this.celphone = celphone;
-        this.registerDate = registerDate;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,16 +69,18 @@ public class UserDTO {
         this.registerDate = registerDate;
     }
 
-    // User --> UserDTO
-    public static UserDTO convert(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName(user.getName());
-        userDTO.setSurname(user.getSurname());
-        userDTO.setIdentificationCard(user.getIdentificationCard());
-        userDTO.setCelphone(user.getCelphone());
-        userDTO.setRegisterDate(user.getRegisterDate());
+    // convert method change the User entity instance to a instances of UserDTO
+    // class
+    // UserDTO --> User
+    public static User convert(UserDTO userDTO) {
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        user.setIdentificationCard(userDTO.getIdentificationCard());
+        user.setCelphone(userDTO.getCelphone());
+        user.setRegisterDate(userDTO.getRegisterDate());
 
-        return userDTO;
+        return user;
     }
 
 }

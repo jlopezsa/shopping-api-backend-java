@@ -38,10 +38,10 @@ public class UserController {
         return users;
     }
 
-    @GetMapping("/users/{id}")
-    public UserDTO getUsersFilter(@PathVariable String id) {
+    @GetMapping("/users/{identificationCard}")
+    public UserDTO getUsersFilter(@PathVariable String identificationCard) {
         for (UserDTO singleUser : users) {
-            if (singleUser.getId().equals(id))
+            if (singleUser.getIdentificationCard().equals(identificationCard))
                 return singleUser;
         }
         return null;
@@ -54,10 +54,10 @@ public class UserController {
         return newUserDTO;
     }
 
-    @DeleteMapping("users/{id}")
-    public String deleteUser(@PathVariable String id) {
+    @DeleteMapping("users/{identificationCard}")
+    public String deleteUser(@PathVariable String identificationCard) {
         for (UserDTO specificUser : users) {
-            if (specificUser.getId().equals(id)) {
+            if (specificUser.getIdentificationCard().equals(identificationCard)) {
                 users.remove(specificUser);
                 return "User was deleted";
             }
